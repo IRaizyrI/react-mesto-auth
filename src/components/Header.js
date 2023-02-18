@@ -14,9 +14,7 @@ function Header({signOut,  email}){
             <Route exact path='/'>
             <div className="header__container">
               <h2 className="header__email">{email}</h2>
-              <a className="header__link header__link_sign-out" onClick={signOut}>
-              Выйти
-              </a>
+              <a className="header__link header__link_sign-out" onClick={signOut}>Выйти</a>
             </div>
         </Route>
       </Switch>

@@ -1,5 +1,4 @@
 import React from 'react'
-import Register from './Register';
 
 export default function Login({ handleLogin }) {
   const [email, setEmail] = React.useState('')

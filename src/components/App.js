@@ -161,11 +161,11 @@ function signOut() {
       <div className="App">
       <Header signOut={signOut} email={email}/>
       <Switch>
-          <Route path="/sign-in">
-            <Login handleLogin={handleAuth}></Login>
-          </Route>
-          <Route path="/sign-up">
-            <Register handleRegister={handleAuth}></Register>
+        <Route path="/sign-in">
+          <Login handleLogin={handleAuth}></Login>
+        </Route>
+        <Route path="/sign-up">
+          <Register handleRegister={handleAuth}></Register>
         </Route>
         <ProtectedRoute
           loggedIn={loggedIn}
@@ -179,11 +179,6 @@ function signOut() {
           onCardDelete={handleCardDelete}
           onCardLike={handleCardLike}
           />
-          <ProtectedRoute
-          loggedIn={loggedIn}
-          component={Footer}
-          path={'/'}
-          />
         <Route path="*">
             <Redirect to="/sign-in"/>
         </Route>
@@ -193,6 +188,7 @@ function signOut() {
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={handleCloseClickOverlay} onUpdateAvatar={handleUpdateAvatar}/>
         <ImagePopup card={selectedCard} onClose={handleCloseClickOverlay} isOpened={isImagePopupOpen}/>
         <InfoTooltip isOpen={isInfoPopupOpen} onClose={handleCloseClickOverlay} isSuccess={isSuccess}/>
+        <Footer/>
       </div>
     </CurrentUserContext.Provider>);
 }
