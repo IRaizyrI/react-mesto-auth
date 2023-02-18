@@ -28,4 +28,4 @@
 
 **Демонстрация готового проекта**
 
-* [GitHub Pages](https://iraizyri.github.io/mesto-react-auth/)
+* [GitHub Pages](https://iraizyri.github.io/react-mesto-auth)
