@@ -24,7 +24,6 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({name: '', link: ''})
   const [currentUser, setCurrentUser] = React.useState({ name: '', about: '', id: '', avatar: '' });
   const [cards, setCards] = React.useState([]);
-  const [token, setToken] = React.useState(null);
   const [email, setEmail] = React.useState(null);
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
@@ -66,10 +65,8 @@ function handleAuth(data, operationType) {
       console.log(err);
     });
 }
-React.useEffect(() => {checkAuthorization()});
-
-function checkAuthorization() {
-  setToken(localStorage.getItem('token'))
+React.useEffect(() => {
+  const token = localStorage.getItem("token");
   if (token) {
     auth.checkToken(token)
       .then((res) => {
@@ -79,10 +76,10 @@ function checkAuthorization() {
       })
       .catch((err) => console.log(err))
   }
-}
+}, [loggedIn, history, email])
+
 function signOut() {
   localStorage.removeItem('token')
-  setToken('')
   setLoggedIn(false)
   setEmail('')
   history.push('/sign-in')
@@ -147,14 +144,15 @@ function signOut() {
   };
 
   React.useEffect(() => {
-    api.getInitialCards().then(
-      cards => setCards(cards))
-      .catch(err => console.log(err.message));
+    if(loggedIn){
+      api.getInitialCards().then(
+        cards => setCards(cards))
+        .catch(err => console.log(err.message));
 
-    api.getProfileInfo()
-      .then(data => setCurrentUser(data))
-      .catch(err => console.log(err.message))
-  }, []);
+      api.getProfileInfo()
+        .then(data => setCurrentUser(data))
+        .catch(err => console.log(err.message))
+    }}, [loggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
